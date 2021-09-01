@@ -1,18 +1,12 @@
-# def get_date(date):
-#     date_is_valid = False
-#     if date_is_valid == True:
-#         return date
-#     elif date_is_valid == False:
-#         date = input("Please input a date in dd-mmm-yy format: ")
-#         return date
-
 #ensure that date is in yyyy-mm-dd format
+#returns the input_date; hence we can do expense_date = get_date() in our app.py
+
+#rationale for converting it to using datetime and back is that if the user puts in integers
+# but invalid date, e.g. for month its 2 but day is 30, then they will reject because feb doesn't have 30 days, etc.
 import datetime
 
 def get_date():
-    # yyyy-mm-dd
-    # input_date = "2020-12-21"
-    
+    # yyyy-mm-dd    
     input_date = ""
     while True:
       try:

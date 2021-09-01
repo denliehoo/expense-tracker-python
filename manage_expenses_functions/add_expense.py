@@ -8,7 +8,7 @@ def add_expense(username,expense_data,expense_category,expense_date, expense_amo
         expense_category = input("You are not allowed to use 'Date' as a category. Please choose another category: ")
     
     while expense_category not in category_values:
-      input_helper = f"Did you make a typo? These are your current categories: {', '.join([n for n in category_values])}" if len(category_values)>1 else "You currently have no categories"
+      input_helper = f"Did you make a typo? These are your current categories: {', '.join([n for n in category_values])[5:]}" if len(category_values)>1 else "You currently have no categories"
       add_cat_res = input(f"The category doesn't exist. \n{input_helper} \nAdd the expense to a new category '{expense_category}'?(y/n) ")
       while add_cat_res not in y_n_values:
           add_cat_res = input(f"Sorry, I do not understand you. Please type 'y' or 'n'.\nThe category doesn't exit. \n{input_helper} \nAdd the expense to a new category '{expense_category}'?(y/n) ")
@@ -54,9 +54,10 @@ def add_expense(username,expense_data,expense_category,expense_date, expense_amo
 
     if expense_date in date_values: #i.e. if the date is an existing one in the date column, then we find the row and column and add accordingly
         row_index = date_values.index(expense_date)
-        initial_amount = float(expense_data.iloc[row_index,column_index]) #have to convery the numpyin64 object to a float
+        #initial_amount = float(expense_data.iloc[row_index,column_index]) #have to convery the numpyin64 object to a float
         col_name= category_values[column_index]
-        expense_data.loc[row_index,col_name] = (expense_amount + initial_amount)  #adds the amount
+        #expense_data.loc[row_index,col_name] = (expense_amount + initial_amount)  #adds the amount
+        expense_data.loc[row_index,col_name] += expense_amount
         print("Added to the current row for the date")
 
     else: #i.e. if the date doesn't exist in the date column, then we'll need to make a new row for it and add the data

@@ -34,5 +34,5 @@ def login(user_database, username,password):
         print("Returning to login / register page...")
         return False
     print("Welcome",user_database.iloc[username_index,2])
-    return True
+    return username
     
