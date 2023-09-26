@@ -1,12 +1,6 @@
-#login
-
-
-# username = input("What is your username?: ")
-# password = input("What is your password?: ")
-
-#maybe can do something like if login_status = login() which returns True or False. Then if true, continue on to actions
-#hint: password convention here is usually username+Password1! e.g. if user name is test then password is testPassword1!
 import hashlib
+from user_page_functions.user_session import remember_me
+
 def login(user_database, username,password):
     #handling username
     break_function = False
@@ -34,5 +28,16 @@ def login(user_database, username,password):
         print("Returning to login / register page...")
         return False
     print("Welcome",user_database.iloc[username_index,2])
+    
+    # asks the user if they want their login details to be remembered
+    remember_login = input("Do you want us to remember your login details?(y/n) ")
+    while remember_login not in ["y","Y","n","N"]:
+        remember_login = input("Sorry I do not understand you, please input y or n only. Do you want us to remember your login details?(y/n) ")
+    
+    if remember_login == "y" or remember_login == "Y":
+        remember_me(username)
+    else:
+        print("Okay, we will not remember your login details.")
+                
     return username
     
